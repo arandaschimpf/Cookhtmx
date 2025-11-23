@@ -1,4 +1,5 @@
 import type { PropsWithChildren } from '@kitajs/html';
+import { Header } from './Header.js';
 
 /**
  * Layout Component
@@ -32,7 +33,8 @@ export function Layout({ children }: PropsWithChildren) {
             src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"
           ></script>
         </head>
-        <body class="bg-gray-50 min-h-screen">
+        <body class="bg-black min-h-screen grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto_1fr] lg:grid-rows-1 gap-0 h-screen overflow-hidden">
+          <Header />
           {children}
         </body>
       </html>
