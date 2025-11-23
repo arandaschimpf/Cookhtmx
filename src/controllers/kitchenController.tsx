@@ -21,9 +21,8 @@ export async function getHomePage(
   reply: FastifyReply
 ) {
   const wallets = walletService.getAllWallets();
-  const selectedWallet = walletService.getSelectedWallet();
 
-  return reply.html(<HomePage count={count} wallets={wallets} selectedWallet={selectedWallet} />);
+  return reply.html(<HomePage count={count} wallets={wallets} />);
 }
 
 /**

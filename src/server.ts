@@ -18,6 +18,7 @@ const fastify = Fastify({
 await fastify.register(fastifyFormbody);
 
 // Register KitaJS HTML plugin
+// @ts-expect-error - KitaJS plugin has type issues with Fastify v5
 await fastify.register(fastifyKitaHtml);
 
 // Serve static files from public directory

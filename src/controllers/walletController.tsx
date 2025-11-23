@@ -1,6 +1,6 @@
-import type { FastifyRequest, FastifyReply } from 'fastify';
-import { walletService } from '../services/walletService.js';
-import { WalletSelector } from '../components/WalletSelector.js';
+import type { FastifyRequest, FastifyReply } from "fastify";
+import { walletService } from "../services/walletService.js";
+import { WalletSelector } from "../components/WalletSelector.js";
 
 interface SelectWalletBody {
   walletId: string;
@@ -20,14 +20,12 @@ export async function postSelectWallet(
   const selectedWallet = walletService.selectWallet(walletId);
 
   if (!selectedWallet) {
-    return reply.code(404).send({ error: 'Wallet not found' });
+    return reply.code(404).send({ error: "Wallet not found" });
   }
 
   // Get all wallets with updated selection
   const wallets = walletService.getAllWallets();
 
-  // Return the updated WalletSelector component
-  return reply.html(
-    <WalletSelector wallets={wallets} selectedWallet={selectedWallet} />
-  );
+  // Return the updated WalletSelector component (dropdown will be closed via Alpine.js)
+  return reply.html(<WalletSelector wallets={wallets} />);
 }

@@ -4,7 +4,6 @@ import type { Wallet } from "../types/wallet.js";
 
 export interface LayoutProps extends PropsWithChildren {
   wallets: Wallet[];
-  selectedWallet?: Wallet;
 }
 
 /**
@@ -13,7 +12,7 @@ export interface LayoutProps extends PropsWithChildren {
  * Full HTML wrapper with all necessary scripts and stylesheets.
  * Includes Tailwind CSS, htmx, and Alpine.js from CDN.
  */
-export function Layout({ children, wallets, selectedWallet }: LayoutProps) {
+export function Layout({ children, wallets }: LayoutProps) {
   return (
     <>
       {"<!DOCTYPE html>"}
@@ -43,7 +42,7 @@ export function Layout({ children, wallets, selectedWallet }: LayoutProps) {
           ></script>
         </head>
         <body class="bg-black min-h-screen">
-          <Header wallets={wallets} selectedWallet={selectedWallet} />
+          <Header wallets={wallets} />
           {children}
         </body>
       </html>

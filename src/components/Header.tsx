@@ -1,11 +1,10 @@
-import { mockPositions } from '../types/position.js';
-import { PositionButton } from './PositionButton.js';
-import { WalletSelector } from './WalletSelector.js';
-import type { Wallet } from '../types/wallet.js';
+import { mockPositions } from "../types/position.js";
+import { PositionButton } from "./PositionButton.js";
+import { WalletSelector } from "./WalletSelector.js";
+import type { Wallet } from "../types/wallet.js";
 
 export interface HeaderProps {
   wallets: Wallet[];
-  selectedWallet?: Wallet;
 }
 
 /**
@@ -14,7 +13,7 @@ export interface HeaderProps {
  * Main navigation header with positions display, search, currency toggle, and user controls.
  * Uses Alpine.js for interactive elements like mobile menu, currency toggle, and wallet selector.
  */
-export function Header({ wallets, selectedWallet }: HeaderProps) {
+export function Header({ wallets }: HeaderProps) {
   return (
     <header class="col-span-1 row-span-1 bg-black lg:col-span-2 relative">
       <div
@@ -25,7 +24,10 @@ export function Header({ wallets, selectedWallet }: HeaderProps) {
         <div class="absolute left-0 top-[-40%] flex flex-1 items-stretch justify-start gap-1 opacity-0">
           {mockPositions.map((position, index) => (
             <>
-              <PositionButton position={position} className="inline-flex self-center" />
+              <PositionButton
+                position={position}
+                className="inline-flex self-center"
+              />
               {index !== mockPositions.length - 1 && (
                 <div class="my-2 h-auto min-h-6 w-px bg-gray-500"></div>
               )}
@@ -43,7 +45,12 @@ export function Header({ wallets, selectedWallet }: HeaderProps) {
               type="button"
             >
               <div class="align-center flex items-center flex-row justify-center gap-1">
-                <img src="/public/icons/positions-icon.svg" alt="Positions" width="18" height="18" />
+                <img
+                  src="/public/icons/positions-icon.svg"
+                  alt="Positions"
+                  width="18"
+                  height="18"
+                />
                 <p class="m-0 font-normal text-3.5 leading-5 tracking-0 text-left">
                   Positions
                 </p>
@@ -55,7 +62,12 @@ export function Header({ wallets, selectedWallet }: HeaderProps) {
               class="bg-button-ghost-bg-default hover:bg-button-ghost-bg-hover disabled:bg-button-ghost-bg-disabled active:bg-button-ghost-bg-selected shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke text-icon-primary disabled:text-icon-quaternary p-2 rounded-2 hidden lg:inline-flex"
               type="button"
             >
-              <img src="/public/icons/search-icon.svg" alt="Search" width="18" height="18" />
+              <img
+                src="/public/icons/search-icon.svg"
+                alt="Search"
+                width="18"
+                height="18"
+              />
             </button>
           </div>
 
@@ -97,58 +109,41 @@ export function Header({ wallets, selectedWallet }: HeaderProps) {
                   </div>
                 </div>
               </button>
-              <p class="text-3.25 font-semibold" x-bind:class="showPricesInUsd ? 'text-white-1000' : 'text-gray-700'">SOL</p>
+              <p
+                class="text-3.25 font-semibold"
+                x-bind:class="showPricesInUsd ? 'text-white-1000' : 'text-gray-700'"
+              >
+                SOL
+              </p>
             </div>
           </div>
 
-          {/* Wallet Popover */}
-          <div class="mx-2 max-lg:hidden relative">
-            <button
-              type="button"
-              x-on:click="walletSelectorOpen = !walletSelectorOpen"
-              class="text-white-1000 flex items-center gap-2 rounded-1.5 bg-gray-300 py-2 pl-2.5 pr-2 shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke hover:cursor-pointer hover:bg-gray-500 active:bg-gray-400 disabled:pointer-events-none"
-            >
-              <div class="flex flex-row items-center gap-1 font-bold">
-                <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary">
-                  {selectedWallet?.solBalance.toFixed(6) || '0.000000'}
-                </p>
-                <img
-                  alt="Solana Token Image"
-                  loading="lazy"
-                  width="18"
-                  height="18"
-                  decoding="async"
-                  class="rounded-full aspect-square"
-                  src="https://dev.cooking.gg/img/tokens/sol.png"
-                />
-              </div>
-              <img
-                src="/public/icons/chevron-down.svg"
-                alt="Expand"
-                width="14"
-                height="14"
-                x-bind:class="walletSelectorOpen ? 'rotate-180' : ''"
-                class="transition-transform duration-200"
-              />
-            </button>
-
-            {/* Wallet Selector Popover */}
-            <div x-show="walletSelectorOpen" x-cloak>
-              <WalletSelector wallets={wallets} selectedWallet={selectedWallet} />
-            </div>
+          {/* Wallet Selector */}
+          <div class="mx-2 max-lg:hidden">
+            <WalletSelector wallets={wallets} />
           </div>
 
           {/* User Avatar */}
           <button
             class="disabled:bg-button-primary-bg-disabled active:bg-button-primary-bg-selected text-text-primary disabled:text-text-tertiary relative mr-0 h-8.5 min-h-8.5 w-8.5 min-w-8.5 cursor-default rounded-full border-0.5 border-gray-500 bg-gray-300 p-0 hover:bg-gray-500 max-lg:hidden"
             style="background-image: url('https://lh3.googleusercontent.com/a/ACg8ocKeJJ5UzwNHGdWEpQqFqc8883cEd9RFqZywose97bTkyTAh_Q=s96-c?v=1763904865'); background-size: cover; background-position: center center;"
-          >
-          </button>
+          ></button>
 
           {/* Mobile Logo */}
           <div class="ml-2 flex h-full items-center lg:hidden">
-            <img src="/public/icons/cooking-chef.svg" alt="Cooking Chef" class="mr-1 size-[26px]" width="30" height="28" />
-            <img src="/public/icons/cooking-logo-text.svg" alt="COOKING" width="88" height="16" />
+            <img
+              src="/public/icons/cooking-chef.svg"
+              alt="Cooking Chef"
+              class="mr-1 size-[26px]"
+              width="30"
+              height="28"
+            />
+            <img
+              src="/public/icons/cooking-logo-text.svg"
+              alt="COOKING"
+              width="88"
+              height="16"
+            />
           </div>
 
           {/* Mobile Menu Toggle */}
@@ -165,7 +160,9 @@ export function Header({ wallets, selectedWallet }: HeaderProps) {
                 height="16"
                 x-show="!mobileNavbarOpen"
               />
-              <span x-show="mobileNavbarOpen" x-cloak>✕</span>
+              <span x-show="mobileNavbarOpen" x-cloak>
+                ✕
+              </span>
             </div>
           </button>
         </div>
