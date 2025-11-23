@@ -6,6 +6,7 @@ import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
 import { getHomePage, postIncrement } from './controllers/kitchenController.js';
 import { postSelectWallet } from './controllers/walletController.js';
+import { getPositionsModal, getPositions } from './controllers/positionsController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -33,6 +34,10 @@ fastify.post('/increment', postIncrement);
 
 // Wallet routes
 fastify.post('/wallet/select', postSelectWallet);
+
+// Positions routes
+fastify.get('/positions/modal', getPositionsModal);
+fastify.get('/positions', getPositions);
 
 // Start the server
 const start = async () => {

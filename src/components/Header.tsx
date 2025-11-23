@@ -45,6 +45,9 @@ export function Header({ wallets, positions }: HeaderProps) {
             <button
               class="bg-button-ghost-bg-default hover:bg-button-ghost-bg-hover disabled:bg-button-ghost-bg-disabled active:bg-button-ghost-bg-selected shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke text-text-primary disabled:text-text-tertiary px-3 py-1.75 rounded-xs"
               type="button"
+              hx-get="/positions/modal"
+              hx-target="#positions-modal"
+              hx-swap="innerHTML"
             >
               <div class="align-center flex items-center flex-row justify-center gap-1">
                 <img
@@ -74,7 +77,13 @@ export function Header({ wallets, positions }: HeaderProps) {
           </div>
 
           {/* Middle section: Positions display */}
-          <div id="positions-container" class="flex items-center justify-start gap-1">
+          <div
+            id="positions-container"
+            class="flex items-center justify-start gap-1"
+            hx-get="/positions"
+            hx-trigger="every 5s"
+            hx-swap="innerHTML"
+          >
             <PositionsList positions={positions} />
           </div>
         </div>

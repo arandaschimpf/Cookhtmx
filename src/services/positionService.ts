@@ -96,9 +96,18 @@ const positionsByWallet: Record<string, Position[]> = {
 class PositionService {
   /**
    * Get positions for a specific wallet
+   * Randomizes holdings by ±20% for demo purposes
    */
   getPositionsByWalletId(walletId: string): Position[] {
-    return positionsByWallet[walletId] || [];
+    const positions = positionsByWallet[walletId] || [];
+
+    // Randomize holdings by ±20% for each position
+    return positions.map((position) => ({
+      ...position,
+      holdings: parseFloat(
+        (position.holdings * (0.8 + Math.random() * 0.4)).toFixed(6)
+      ), // Random between 80% and 120%, capped at 4 decimals
+    }));
   }
 
   /**

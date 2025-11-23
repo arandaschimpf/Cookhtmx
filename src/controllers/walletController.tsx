@@ -39,7 +39,14 @@ export async function postSelectWallet(
       <WalletSelector wallets={wallets} />
 
       {/* Out-of-band swap - updates #positions-container */}
-      <div id="positions-container" class="flex items-center justify-start gap-1" hx-swap-oob="true">
+      <div
+        id="positions-container"
+        class="flex items-center justify-start gap-1"
+        hx-get="/positions"
+        hx-trigger="every 5s"
+        hx-swap="innerHTML"
+        hx-swap-oob="true"
+      >
         <PositionsList positions={positions} />
       </div>
     </>

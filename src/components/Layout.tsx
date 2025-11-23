@@ -46,6 +46,9 @@ export function Layout({ children, wallets, positions }: LayoutProps) {
         <body class="bg-black min-h-screen">
           <Header wallets={wallets} positions={positions} />
           {children}
+
+          {/* Modal container for htmx to inject modals */}
+          <div id="positions-modal"></div>
         </body>
       </html>
     </>
