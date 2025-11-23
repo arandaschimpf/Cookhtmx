@@ -1,5 +1,11 @@
-import type { PropsWithChildren } from "@kitajs/html";
-import { Header } from "./Header.js";
+import type { PropsWithChildren } from '@kitajs/html';
+import { Header } from './Header.js';
+import type { Wallet } from '../types/wallet.js';
+
+export interface LayoutProps extends PropsWithChildren {
+  wallets: Wallet[];
+  selectedWallet?: Wallet;
+}
 
 /**
  * Layout Component
@@ -7,10 +13,10 @@ import { Header } from "./Header.js";
  * Full HTML wrapper with all necessary scripts and stylesheets.
  * Includes Tailwind CSS, htmx, and Alpine.js from CDN.
  */
-export function Layout({ children }: PropsWithChildren) {
+export function Layout({ children, wallets, selectedWallet }: LayoutProps) {
   return (
     <>
-      {"<!DOCTYPE html>"}
+      {'<!DOCTYPE html>'}
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
@@ -36,8 +42,8 @@ export function Layout({ children }: PropsWithChildren) {
             src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"
           ></script>
         </head>
-        <body class="bg-black min-h-screen">
-          <Header />
+        <body class="bg-black min-h-screen grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto_1fr] lg:grid-rows-1 gap-0 h-screen overflow-hidden">
+          <Header wallets={wallets} selectedWallet={selectedWallet} />
           {children}
         </body>
       </html>

@@ -1,6 +1,7 @@
 import type { FastifyReply, FastifyRequest } from 'fastify';
 import { HomePage } from '../views/HomePage.js';
 import { Counter } from '../components/Counter.js';
+import { walletService } from '../services/walletService.js';
 
 /**
  * Counter Controller
@@ -19,7 +20,10 @@ export async function getHomePage(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  return reply.html(<HomePage count={count} />);
+  const wallets = walletService.getAllWallets();
+  const selectedWallet = walletService.getSelectedWallet();
+
+  return reply.html(<HomePage count={count} wallets={wallets} selectedWallet={selectedWallet} />);
 }
 
 /**

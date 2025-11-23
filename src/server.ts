@@ -4,7 +4,8 @@ import fastifyFormbody from '@fastify/formbody';
 import fastifyKitaHtml from '@kitajs/fastify-html-plugin';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import { getHomePage, postIncrement } from './controllers/counterController.js';
+import { getHomePage, postIncrement } from './controllers/kitchenController.js';
+import { postSelectWallet } from './controllers/walletController.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -28,6 +29,9 @@ await fastify.register(fastifyStatic, {
 // Routes
 fastify.get('/', getHomePage);
 fastify.post('/increment', postIncrement);
+
+// Wallet routes
+fastify.post('/wallet/select', postSelectWallet);
 
 // Start the server
 const start = async () => {

@@ -1,18 +1,25 @@
 import { mockPositions } from '../types/position.js';
 import { PositionButton } from './PositionButton.js';
+import { WalletSelector } from './WalletSelector.js';
+import type { Wallet } from '../types/wallet.js';
+
+export interface HeaderProps {
+  wallets: Wallet[];
+  selectedWallet?: Wallet;
+}
 
 /**
  * Header Component
  *
  * Main navigation header with positions display, search, currency toggle, and user controls.
- * Uses Alpine.js for interactive elements like mobile menu and currency toggle.
+ * Uses Alpine.js for interactive elements like mobile menu, currency toggle, and wallet selector.
  */
-export function Header() {
+export function Header({ wallets, selectedWallet }: HeaderProps) {
   return (
     <header class="col-span-1 row-span-1 overflow-y-hidden bg-black lg:col-span-2">
       <div
         class="relative flex items-center justify-between gap-4 overflow-x-hidden bg-black p-2 max-lg:m-2 max-lg:rounded-lg max-lg:border max-lg:border-gray-400 max-lg:bg-gray-300"
-        x-data="{ mobileNavbarOpen: false, showPricesInUsd: false }"
+        x-data="{ mobileNavbarOpen: false, showPricesInUsd: false, walletSelectorOpen: false }"
       >
         {/* Hidden placeholder for measuring positions width */}
         <div class="absolute left-0 top-[-40%] flex flex-1 items-stretch justify-start gap-1 opacity-0">
@@ -95,44 +102,40 @@ export function Header() {
           </div>
 
           {/* Wallet Popover */}
-          <div class="mx-2 max-lg:hidden">
+          <div class="mx-2 max-lg:hidden relative">
             <button
               type="button"
+              x-on:click="walletSelectorOpen = !walletSelectorOpen"
               class="text-white-1000 flex items-center gap-2 rounded-1.5 bg-gray-300 py-2 pl-2.5 pr-2 shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke hover:cursor-pointer hover:bg-gray-500 active:bg-gray-400 disabled:pointer-events-none"
             >
-              <div class="flex flex-row items-center gap-2">
-                <div class="flex flex-row items-center gap-1 font-bold">
-                  <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary">
-                    0.010287
-                  </p>
-                  <img
-                    alt="Solana Token Image"
-                    loading="lazy"
-                    width="18"
-                    height="18"
-                    decoding="async"
-                    class="rounded-full aspect-square"
-                    src="https://dev.cooking.gg/img/tokens/sol.png"
-                  />
-                </div>
-                <div role="separator" aria-orientation="vertical" class="bg-gray-500 w-0.25 h-4.5"></div>
-                <div class="flex flex-row items-center gap-1 font-bold">
-                  <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary">
-                    0.00
-                  </p>
-                  <img
-                    alt="USD Token Image"
-                    loading="lazy"
-                    width="18"
-                    height="18"
-                    decoding="async"
-                    class="rounded-full aspect-square"
-                    src="https://dev.cooking.gg/img/tokens/usdc.png"
-                  />
-                </div>
+              <div class="flex flex-row items-center gap-1 font-bold">
+                <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary">
+                  {selectedWallet?.solBalance.toFixed(6) || '0.000000'}
+                </p>
+                <img
+                  alt="Solana Token Image"
+                  loading="lazy"
+                  width="18"
+                  height="18"
+                  decoding="async"
+                  class="rounded-full aspect-square"
+                  src="https://dev.cooking.gg/img/tokens/sol.png"
+                />
               </div>
-              <img src="/public/icons/chevron-down.svg" alt="Expand" width="14" height="14" />
+              <img
+                src="/public/icons/chevron-down.svg"
+                alt="Expand"
+                width="14"
+                height="14"
+                x-bind:class="walletSelectorOpen ? 'rotate-180' : ''"
+                class="transition-transform duration-200"
+              />
             </button>
+
+            {/* Wallet Selector Popover */}
+            <div x-show="walletSelectorOpen" x-cloak>
+              <WalletSelector wallets={wallets} selectedWallet={selectedWallet} />
+            </div>
           </div>
 
           {/* User Avatar */}
