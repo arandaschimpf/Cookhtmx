@@ -35,29 +35,19 @@ Cookhtmx/
 npm install
 ```
 
-### 2. Build Tailwind CSS
-
-Generate the compiled CSS file:
-
-```bash
-npm run build:css
-```
-
-Or watch for changes during development:
-
-```bash
-npm run build:css:watch
-```
-
-### 3. Run the Development Server
+### 2. Run the Development Server
 
 ```bash
 npm run dev
 ```
 
+This single command runs both:
+- **Server** with hot reload (watches TypeScript files)
+- **Tailwind CSS** compiler (watches for style changes)
+
 The server will start at [http://localhost:3000](http://localhost:3000)
 
-### 4. Build for Production
+### 3. Build for Production
 
 ```bash
 npm run build
@@ -66,10 +56,11 @@ npm start
 
 ## Available Scripts
 
-- `npm run dev` - Start development server with hot reload
-- `npm run build` - Compile TypeScript and build CSS
-- `npm run build:css` - Build Tailwind CSS (production)
-- `npm run build:css:watch` - Watch and rebuild CSS on changes
+- `npm run dev` - Start development server with hot reload (runs both server and CSS watcher)
+- `npm run dev:server` - Run only the server with hot reload
+- `npm run dev:css` - Run only the Tailwind CSS watcher
+- `npm run build` - Compile TypeScript and build CSS for production
+- `npm run build:css` - Build Tailwind CSS (minified for production)
 - `npm run start` - Run production build
 - `npm run type-check` - Type check without emitting files
 
