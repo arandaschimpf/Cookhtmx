@@ -1,5 +1,5 @@
-import type { PropsWithChildren } from '@kitajs/html';
-import { Header } from './Header.js';
+import type { PropsWithChildren } from "@kitajs/html";
+import { Header } from "./Header.js";
 
 /**
  * Layout Component
@@ -10,11 +10,14 @@ import { Header } from './Header.js';
 export function Layout({ children }: PropsWithChildren) {
   return (
     <>
-      {'<!DOCTYPE html>'}
+      {"<!DOCTYPE html>"}
       <html lang="en">
         <head>
           <meta charset="UTF-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
           <title>Cookhtmx - Modern Server-Driven Web App</title>
 
           {/* Tailwind CSS */}
@@ -33,7 +36,7 @@ export function Layout({ children }: PropsWithChildren) {
             src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.3/dist/cdn.min.js"
           ></script>
         </head>
-        <body class="bg-black min-h-screen grid grid-cols-1 lg:grid-cols-2 grid-rows-[auto_1fr] lg:grid-rows-1 gap-0 h-screen overflow-hidden">
+        <body class="bg-black min-h-screen">
           <Header />
           {children}
         </body>
