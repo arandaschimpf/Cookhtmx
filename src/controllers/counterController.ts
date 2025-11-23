@@ -29,12 +29,12 @@ export async function postIncrement(
   request: FastifyRequest,
   reply: FastifyReply
 ) {
-  // Placeholder logic - no actual increment
+  // Increment the counter
   // In a real app, you would:
   // - Validate request data
   // - Update database
   // - Handle errors
-  count = 0;
+  count++;
 
   return reply.html(<Counter count={count} />);
 }
