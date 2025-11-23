@@ -15,8 +15,16 @@ A modern, server-driven web application scaffolding using **Fastify**, **KitaJS 
 ```
 Cookhtmx/
 ├── src/
+│   ├── components/        # Reusable UI components
+│   │   ├── Layout.tsx     # Main HTML wrapper
+│   │   └── Counter.tsx    # Counter component (htmx + Alpine.js example)
+│   ├── views/             # Page-level views
+│   │   └── HomePage.tsx   # Home page view
+│   ├── controllers/       # Route handlers and business logic
+│   │   └── counterController.ts
+│   ├── types/             # Shared TypeScript types
+│   │   └── index.ts
 │   ├── server.ts          # Fastify server entry point
-│   ├── components.tsx     # KitaJS components (Layout, CounterComponent)
 │   └── styles.css         # Tailwind CSS directives
 ├── public/
 │   └── .gitkeep          # Placeholder (output.css will be generated here)
@@ -26,6 +34,13 @@ Cookhtmx/
 ├── postcss.config.js
 └── README.md
 ```
+
+### Folder Structure Explanation
+
+- **`components/`** - Reusable UI components that can be used across multiple views
+- **`views/`** - Page-level components that represent complete pages
+- **`controllers/`** - Business logic and route handlers, following MVC pattern
+- **`types/`** - Shared TypeScript interfaces and types
 
 ## Getting Started
 
@@ -64,20 +79,26 @@ npm start
 - `npm run start` - Run production build
 - `npm run type-check` - Type check without emitting files
 
-## Components
+## Architecture
 
-### Layout Component
+### Components (`src/components/`)
 
-Full HTML wrapper with:
-- Tailwind CSS (`/public/output.css`)
-- htmx (from CDN)
-- Alpine.js (from CDN)
+Reusable UI components:
 
-### CounterComponent
+- **`Layout.tsx`** - Full HTML wrapper with Tailwind CSS, htmx, and Alpine.js from CDN
+- **`Counter.tsx`** - Example component demonstrating both htmx and Alpine.js
 
-Demonstrates both htmx and Alpine.js:
-- **htmx button**: Server-side interaction with `hx-post`, `hx-target`, `hx-swap`
-- **Alpine.js dropdown**: Client-side reactivity with `x-data`, `x-show`, `x-transition`
+### Views (`src/views/`)
+
+Page-level components:
+
+- **`HomePage.tsx`** - Main landing page that composes Layout and Counter components
+
+### Controllers (`src/controllers/`)
+
+Route handlers with business logic:
+
+- **`counterController.ts`** - Handles home page rendering and counter increment logic
 
 ## Routes
 
@@ -88,12 +109,14 @@ Demonstrates both htmx and Alpine.js:
 
 This is a **scaffolding project** with placeholder business logic. To build your application:
 
-1. Add actual state management in `src/server.ts`
-2. Create additional components in `src/components.tsx` or separate files
-3. Add more routes and handlers
-4. Customize Tailwind configuration
-5. Add database integration
-6. Implement authentication/authorization
+1. Add actual state management in `src/controllers/`
+2. Create additional components in `src/components/`
+3. Create new views in `src/views/`
+4. Add more routes and controllers
+5. Define your domain types in `src/types/`
+6. Customize Tailwind configuration
+7. Add database integration
+8. Implement authentication/authorization
 
 ## License
 
