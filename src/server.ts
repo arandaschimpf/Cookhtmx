@@ -1,5 +1,6 @@
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
+import fastifyFormbody from '@fastify/formbody';
 import fastifyHtmlPlugin from '@kitajs/fastify-html-plugin';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
@@ -11,6 +12,9 @@ const __dirname = dirname(__filename);
 const fastify = Fastify({
   logger: true,
 });
+
+// Register form body parser
+await fastify.register(fastifyFormbody);
 
 // Register KitaJS HTML plugin
 await fastify.register(fastifyHtmlPlugin);
