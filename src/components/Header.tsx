@@ -1,10 +1,12 @@
-import { mockPositions } from "../types/position.js";
 import { PositionButton } from "./PositionButton.js";
+import { PositionsList } from "./PositionsList.js";
 import { WalletSelector } from "./WalletSelector.js";
 import type { Wallet } from "../types/wallet.js";
+import type { Position } from "../types/position.js";
 
 export interface HeaderProps {
   wallets: Wallet[];
+  positions: Position[];
 }
 
 /**
@@ -13,7 +15,7 @@ export interface HeaderProps {
  * Main navigation header with positions display, search, currency toggle, and user controls.
  * Uses Alpine.js for interactive elements like mobile menu, currency toggle, and wallet selector.
  */
-export function Header({ wallets }: HeaderProps) {
+export function Header({ wallets, positions }: HeaderProps) {
   return (
     <header class="col-span-1 row-span-1 bg-black lg:col-span-2 relative">
       <div
@@ -22,13 +24,13 @@ export function Header({ wallets }: HeaderProps) {
       >
         {/* Hidden placeholder for measuring positions width */}
         <div class="absolute left-0 top-[-40%] flex flex-1 items-stretch justify-start gap-1 opacity-0">
-          {mockPositions.map((position, index) => (
+          {positions.map((position, index) => (
             <>
               <PositionButton
                 position={position}
                 className="inline-flex self-center"
               />
-              {index !== mockPositions.length - 1 && (
+              {index !== positions.length - 1 && (
                 <div class="my-2 h-auto min-h-6 w-px bg-gray-500"></div>
               )}
             </>
@@ -72,15 +74,8 @@ export function Header({ wallets }: HeaderProps) {
           </div>
 
           {/* Middle section: Positions display */}
-          <div class="flex items-center justify-start gap-1">
-            {mockPositions.map((position, index) => (
-              <>
-                <PositionButton position={position} className="max-lg:hidden" />
-                {index !== mockPositions.length - 1 && (
-                  <div class="my-1.5 h-auto min-h-6 w-px bg-gray-700"></div>
-                )}
-              </>
-            ))}
+          <div id="positions-container" class="flex items-center justify-start gap-1">
+            <PositionsList positions={positions} />
           </div>
         </div>
 

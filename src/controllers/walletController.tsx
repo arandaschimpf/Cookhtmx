@@ -1,6 +1,8 @@
 import type { FastifyRequest, FastifyReply } from "fastify";
 import { walletService } from "../services/walletService.js";
+import { positionService } from "../services/positionService.js";
 import { WalletSelector } from "../components/WalletSelector.js";
+import { PositionsList } from "../components/PositionsList.js";
 
 interface SelectWalletBody {
   walletId: string;
@@ -26,6 +28,20 @@ export async function postSelectWallet(
   // Get all wallets with updated selection
   const wallets = walletService.getAllWallets();
 
-  // Return the updated WalletSelector component (dropdown will be closed via Alpine.js)
-  return reply.html(<WalletSelector wallets={wallets} />);
+  // Get positions for the newly selected wallet
+  const positions = positionService.getPositionsByWalletId(selectedWallet.id);
+
+  // Return both WalletSelector (primary target) and PositionsList (OOB swap)
+  // This updates only the wallet selector and positions, avoiding header flicker
+  return reply.html(
+    <>
+      {/* Primary target - replaces #wallet-selector-container */}
+      <WalletSelector wallets={wallets} />
+
+      {/* Out-of-band swap - updates #positions-container */}
+      <div id="positions-container" class="flex items-center justify-start gap-1" hx-swap-oob="true">
+        <PositionsList positions={positions} />
+      </div>
+    </>
+  );
 }

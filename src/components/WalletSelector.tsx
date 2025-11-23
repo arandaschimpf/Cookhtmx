@@ -23,10 +23,10 @@ export function WalletSelector({ wallets }: WalletSelectorProps) {
         id="wallet-balance-button"
         type="button"
         x-on:click="walletSelectorOpen = !walletSelectorOpen"
-        class="text-white-1000 flex items-center gap-2 rounded-1.5 bg-gray-300 py-2 pl-2.5 pr-2 shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke hover:cursor-pointer hover:bg-gray-500 active:bg-gray-400 disabled:pointer-events-none"
+        class="text-white-1000 flex items-center gap-2 rounded-1.5 bg-gray-300 py-2 pl-2.5 pr-2 shadow-[0_0_0_1px_var(--tw-shadow-color)] shadow-button-ghost-stroke hover:cursor-pointer hover:bg-gray-500 active:bg-gray-400 disabled:pointer-events-none min-w-[120px]"
       >
         <div class="flex flex-row items-center gap-1 font-bold">
-          <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary">
+          <p class="m-0 text-3.25 leading-4.5 tracking-0 text-left font-bold text-text-primary font-mono tabular-nums">
             {selectedWallet?.solBalance.toFixed(6) || "0.000000"}
           </p>
           <img

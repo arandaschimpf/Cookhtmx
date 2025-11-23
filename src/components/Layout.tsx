@@ -1,9 +1,11 @@
 import type { PropsWithChildren } from "@kitajs/html";
 import { Header } from "./Header.js";
 import type { Wallet } from "../types/wallet.js";
+import type { Position } from "../types/position.js";
 
 export interface LayoutProps extends PropsWithChildren {
   wallets: Wallet[];
+  positions: Position[];
 }
 
 /**
@@ -12,7 +14,7 @@ export interface LayoutProps extends PropsWithChildren {
  * Full HTML wrapper with all necessary scripts and stylesheets.
  * Includes Tailwind CSS, htmx, and Alpine.js from CDN.
  */
-export function Layout({ children, wallets }: LayoutProps) {
+export function Layout({ children, wallets, positions }: LayoutProps) {
   return (
     <>
       {"<!DOCTYPE html>"}
@@ -42,7 +44,7 @@ export function Layout({ children, wallets }: LayoutProps) {
           ></script>
         </head>
         <body class="bg-black min-h-screen">
-          <Header wallets={wallets} />
+          <Header wallets={wallets} positions={positions} />
           {children}
         </body>
       </html>
