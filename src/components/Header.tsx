@@ -16,9 +16,9 @@ export interface HeaderProps {
  */
 export function Header({ wallets, selectedWallet }: HeaderProps) {
   return (
-    <header class="col-span-1 row-span-1 bg-black lg:col-span-2">
+    <header class="col-span-1 row-span-1 bg-black lg:col-span-2 relative">
       <div
-        class="relative flex items-center justify-between gap-4 overflow-x-hidden bg-black p-2 max-lg:m-2 max-lg:rounded-lg max-lg:border max-lg:border-gray-400 max-lg:bg-gray-300"
+        class="flex items-center justify-between gap-4 bg-black p-2 max-lg:m-2 max-lg:rounded-lg max-lg:border max-lg:border-gray-400 max-lg:bg-gray-300"
         x-data="{ mobileNavbarOpen: false, showPricesInUsd: false, walletSelectorOpen: false }"
       >
         {/* Hidden placeholder for measuring positions width */}
