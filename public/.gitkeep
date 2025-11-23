@@ -1,0 +1,2 @@
+# This directory will contain the compiled Tailwind CSS file (output.css)
+# Run `npm run build:css` to generate it

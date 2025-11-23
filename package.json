@@ -1,0 +1,40 @@
+{
+  "name": "cookhtmx",
+  "version": "1.0.0",
+  "description": "Modern server-driven web application with Fastify, KitaJS, htmx, Alpine.js, and Tailwind CSS",
+  "main": "dist/server.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsx watch src/server.ts",
+    "build": "tsc && npm run build:css",
+    "build:css": "tailwindcss -i ./src/styles.css -o ./public/output.css --minify",
+    "build:css:watch": "tailwindcss -i ./src/styles.css -o ./public/output.css --watch",
+    "start": "node dist/server.js",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "fastify",
+    "kitajs",
+    "htmx",
+    "alpinejs",
+    "tailwindcss",
+    "typescript"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@fastify/static": "^7.0.4",
+    "@kitajs/fastify-html-plugin": "^4.2.0",
+    "@kitajs/html": "^4.2.4",
+    "fastify": "^5.2.0"
+  },
+  "devDependencies": {
+    "@kitajs/ts-html-plugin": "^4.1.1",
+    "@types/node": "^22.10.2",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.17",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
